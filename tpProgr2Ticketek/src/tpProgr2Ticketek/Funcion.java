@@ -57,7 +57,7 @@ public class Funcion {
 		//COMPLETAR
 	}
 
-	public void anularEntrada(String codigo, String contraseña, Funcion funcion) {
+	public void anularEntrada(String codigo, String contraseña) {
     		if (!this.contraseña.equals(contraseña)) {			//controla el usuario
         		System.out.println("Contraseña incorrecta.");
         		return;
