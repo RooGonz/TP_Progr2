@@ -5,7 +5,7 @@ import java.util.List;
 public class Principal {
 
 	public static void main(String[] args) {
-		ITicketek ticketek = new Ticketek();
+		Ticketek ticketek = new Ticketek();
 		// Empresa recien creada
 		printEmpresa(ticketek, "Recien creada");
 		
@@ -24,13 +24,13 @@ public class Principal {
         int asientosPorFilaTeatro = 30;
         int asientosPorFilaMiniestadio = 25;
 
-        ticketek.registrarSede("Teatro Gran Rex", "calle 3", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Teatro Colón", "libertad 621", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Teatro San Martín", "avenida corrientes 1530", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro Gran Rex", "calle 3", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro Colón", "libertad 621", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro San Martín", "avenida corrientes 1530", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
 
-        ticketek.registrarSede("Estadio mini 1", "calle 4", 500, asientosPorFilaMiniestadio, 10, 15000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Mini Arena Norte", "pasaje 5", 500, asientosPorFilaMiniestadio, 12, 30000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Microestadio Sur", "pje. 10", 500, asientosPorFilaMiniestadio, 20, 20000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Estadio mini 1", "calle 4", 500, asientosPorFilaMiniestadio, 10, 15000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Mini Arena Norte", "pasaje 5", 500, asientosPorFilaMiniestadio, 12, 30000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Microestadio Sur", "pje. 10", 500, asientosPorFilaMiniestadio, 20, 20000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
 
 		
 		// 2) Registrar usuarios
@@ -71,7 +71,7 @@ public class Principal {
             "Platea Común",
             asientos 
         );
-        List<IEntrada> entradasConejo = ticketek.venderEntrada(
+        List<Entrada> entradasConejo = ticketek.venderEntrada(
 	        "El Rey León", 
 	        "29/07/25", 
 	        "miguel.conejito@alejandro.com.ar", 
@@ -80,11 +80,11 @@ public class Principal {
 	        asientos 
         );
         System.out.println("\nEntradas Miguel Conejito Alejandro para El Rey Leon:");
-        for (IEntrada e: entradasConejo)
+        for (Entrada e: entradasConejo)
         	System.out.println(" - " + e);
         
         // // Entradas para coldplay
-        List<IEntrada> entradasAlcides = ticketek.venderEntrada(
+        List<Entrada> entradasAlcides = ticketek.venderEntrada(
                 "Coldplay en vivo", 
                 "31/07/25", 
                 "alcides@violeta.com", 
@@ -92,7 +92,7 @@ public class Principal {
                 10 
                 );
         System.out.println("\nEntradas Alcides para Coldplay:");
-        for (IEntrada e: entradasAlcides)
+        for (Entrada e: entradasAlcides)
         	System.out.println(" - " + e);
 		
         // 5) Listar funciones de un espectaculo
@@ -104,10 +104,10 @@ public class Principal {
 
 		// 7) Listar todas las entradas compradas por un usuario
 		
-        List<IEntrada> todasLasEntradasAlcides = ticketek
+        List<Entrada> todasLasEntradasAlcides = ticketek
         		.listarTodasLasEntradasDelUsuario("alcides@violeta.com", "1234");
         System.out.println("\nTodas las entradas de Alcides:");
-        for (IEntrada e: todasLasEntradasAlcides)
+        for (Entrada e: todasLasEntradasAlcides)
         	System.out.println(" - " + e);
 
         // 10) y 11) Imprimir los precios para comparar el precio 
@@ -145,16 +145,16 @@ public class Principal {
 
 		
 		// 15) Listar entradas vendidas de un espectaculo
-        List<IEntrada> entradasReyLeon = ticketek
+        List<Entrada> entradasReyLeon = ticketek
         		.listarEntradasEspectaculo("El Rey León");
         System.out.println("\nTodas las entradas para El Rey León:");
-        for (IEntrada e: entradasReyLeon)
+        for (Entrada e: entradasReyLeon)
         	System.out.println(" - " + e);
         
 		printEmpresa(ticketek, "Fin de la simulación");
 	}
 
-	private static void printEmpresa(ITicketek ticketek, String msg) {
+	private static void printEmpresa(Ticketek ticketek, String msg) {
 		System.out.println("\n==========================================");
 		System.out.println("========= " + msg);
 		System.out.println("==========================================\n");

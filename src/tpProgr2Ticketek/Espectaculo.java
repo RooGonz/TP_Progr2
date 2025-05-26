@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Set;
 
 public class Espectaculo {
-    private int codigo;
+    private String codigo;
     private String nombre;
     private List<Funcion> funciones;
  
 
     // Constructor 
-     public crearEspectaculo(int codigo, String nombre) {
+     public Espectaculo(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.funciones = new ArrayList<>();
@@ -51,6 +51,9 @@ public class Espectaculo {
         return nombre;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
+
+   
+}

@@ -5,20 +5,19 @@ import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TicketekTest{
 
-    private ITicketek ticketek;
+    private Ticketek ticketek;
     private String[] sectores_teatro = {"VIP", "Comun", "Baja", "Alta"};
     private int[] capacidad_teatro = {100, 200, 300, 400};
     private int[] capacidad_miniestadio = {50, 100, 150, 200};
     private int[] porcentajeAdicionalTeatro = {70, 40, 50, 0};
     private int asientosPorFilaTeatro = 30;
 
-    private List<IEntrada> entradasJavierColdplay;
+    private List<Entrada> entradasJavierColdplay;
     @Before
     public void init() {
     	ticketek = new Ticketek();
@@ -31,13 +30,13 @@ public class TicketekTest{
         ticketek.registrarSede("Mario Kempes", "avenida 123", 300);
         ticketek.registrarSede("Estadio Único", "boulevard 456", 400);
 
-        ticketek.registrarSede("Teatro Gran Rex", "calle 3", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Teatro Colón", "libertad 621", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Teatro San Martín", "avenida corrientes 1530", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro Gran Rex", "calle 3", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro Colón", "libertad 621", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Teatro San Martín", "avenida corrientes 1530", 1000, asientosPorFilaTeatro, sectores_teatro, capacidad_teatro, porcentajeAdicionalTeatro);
 
-        ticketek.registrarSede("Estadio mini 1", "calle 4", 500, asientosPorFilaTeatro, 30, 25000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Mini Arena Norte", "pasaje 5", 500, asientosPorFilaTeatro, 30, 20000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
-        ticketek.registrarSede("Microestadio Sur", "pje. 10", 500, asientosPorFilaTeatro, 30, 15000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Estadio mini 1", "calle 4", 500, asientosPorFilaTeatro, 30, 25000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Mini Arena Norte", "pasaje 5", 500, asientosPorFilaTeatro, 30, 20000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
+        ticketek.registrarSedeConPlatea("Microestadio Sur", "pje. 10", 500, asientosPorFilaTeatro, 30, 15000.0, sectores_teatro, capacidad_miniestadio, porcentajeAdicionalTeatro);
 
         String[] fechasSirenita = {"25/07/25", "28/07/25", "30/07/25", "31/07/25", "01/08/25"};
         String[] sedesSirenita = {"Teatro Gran Rex", "Teatro Gran Rex", "Teatro Colón", "Teatro Colón", "Teatro Gran Rex"};
@@ -133,7 +132,7 @@ public class TicketekTest{
    
     @Test
     public void ej04_venderEntradaEstadio() {
-        List<IEntrada> entradas = ticketek.venderEntrada(
+        List<Entrada> entradas = ticketek.venderEntrada(
         "Coldplay en vivo", 
         "28/07/25", 
         "nores@campus.ungs.edu.ar", 
@@ -167,11 +166,11 @@ public class TicketekTest{
     @Test
     public void ej06_listarEntradasFuturas() {
 
-        List<IEntrada> entradasFuturas = ticketek.listarEntradasFuturas("nores@campus.ungs.edu.ar", "1234");
+        List<Entrada> entradasFuturas = ticketek.listarEntradasFuturas("nores@campus.ungs.edu.ar", "1234");
         assertNotNull(entradasFuturas);
         assertEquals(11, entradasFuturas.size()); 
 
-        for (IEntrada entrada : entradasFuturas) {
+        for (Entrada entrada : entradasFuturas) {
             assertFalse(entrada.toString().isEmpty());
         }
     }
@@ -179,11 +178,11 @@ public class TicketekTest{
     @Test
     public void ej07_listarTodasEntradasUsuario() {
     	// Para Jose hay 8 entradas con fechas en el pasado
-        List<IEntrada> entradasFuturas = ticketek.listarTodasLasEntradasDelUsuario("nores@campus.ungs.edu.ar", "1234");
+        List<Entrada> entradasFuturas = ticketek.listarTodasLasEntradasDelUsuario("nores@campus.ungs.edu.ar", "1234");
         assertNotNull(entradasFuturas);
         assertEquals(19, entradasFuturas.size()); 
         int cont=0;
-        for (IEntrada entrada : entradasFuturas) {
+        for (Entrada entrada : entradasFuturas) {
         	if( entrada.toString().contains(" P - "))
         		cont++;
         }
@@ -219,7 +218,7 @@ public class TicketekTest{
 
     @Test
     public void ej09_cambiarEntrada() {
-        IEntrada nuevaEntrada = ticketek.cambiarEntrada(entradasJavierColdplay.get(0), "1234", "25/07/25");
+        Entrada nuevaEntrada = ticketek.cambiarEntrada(entradasJavierColdplay.get(0), "1234", "25/07/25");
         assertNotNull(nuevaEntrada);
         String strEntrada = nuevaEntrada.toString();
         // Tambien se valida el formato del string esperado de las entradas.
